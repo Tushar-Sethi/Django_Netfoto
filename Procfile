@@ -1,0 +1,1 @@
+web: gunicorn Netfoto_Portal.wsgi

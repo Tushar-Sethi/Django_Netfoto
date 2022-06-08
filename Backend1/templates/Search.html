@@ -1,0 +1,20 @@
+{% extends 'Base.html'%}
+{% load static%}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'FrontEnd1/css/Search.css' %}">
+{% endblock %}
+
+{% block title %}
+    List of Blogs
+{% endblock %}
+
+{% block content %}
+<div class="container1 text-center">
+{% comment %} <h1>Search any Ad Post</h1> {% endcomment %}
+<form action="{% url 'search' %}" method="post">
+    {% csrf_token %} 
+    <input type="text" name="search_text" placeholder="Search 'Jewellery,packaging manufacturer' ">
+    <input type="submit" value="Search">
+</form>
+</div>
+{% endblock %}
