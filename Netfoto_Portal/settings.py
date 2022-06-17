@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import psycopg2
 import dj_database_url
+import cloudinary_storage
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'rest_framework',
     'debug_toolbar',
     'Backend1',
@@ -148,8 +151,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
@@ -188,3 +192,8 @@ EMAIL_HOST_USER = 'noreply@covrpage.com'
 EMAIL_HOST_PASSWORD = 'Indiakuse@123'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'deddkjx3m',
+    'API_KEY': '342938969134178',
+    'API_SECRET': 'gArg1_t9r80IgzvIKymeSJucHrw'
+}
