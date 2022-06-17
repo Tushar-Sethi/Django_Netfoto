@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import psycopg2
 import dj_database_url
 
 
@@ -90,11 +91,12 @@ WSGI_APPLICATION = 'Netfoto_Portal.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'netfoto_db',
-#         'HOST':'localhost',
-#         'USER': 'root',
-#         'PASSWORD': '12345678',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd927m56jn88lrh',
+#         'HOST':'ec2-3-223-213-207.compute-1.amazonaws.com',
+#         'USER': 'qrqnkhdkfbvpzo',
+#         'PASSWORD': '10025e65e89d4978db42f3fd8ac585d6dfad20bc668a27379a497d72bbfbf9c3',
+#         'PORT':'5432',
 #     }
 # }
 DATABASES = {
