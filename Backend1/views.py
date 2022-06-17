@@ -720,8 +720,9 @@ def like_post(request):
                 #for notification
                 currentuser = get_object_or_404(User, pk=user_id)
                 post_user = get_object_or_404(User, pk=post.user_id)
-                notification_record = Notifications.objects.get(currentUser = currentuser, user = post_user, post = post_id,action='Liked')
-                notification_record.delete()
+                if(currentuser.id != post_user.id):
+                    notification_record = Notifications.objects.get(currentUser = currentuser, user = post_user, post = post_id,action='Liked')
+                    notification_record.delete()
                 #Till here
 
                 return JsonResponse({"message": 'Like Removed', "status": status.HTTP_200_OK, 'id': post_id, 'likesCount': likesCount})
@@ -769,25 +770,28 @@ def favouritePost(request):
         post_id = request.POST.get('post_id')
         user_id = request.user.id
         post = Post.objects.get(id=post_id)
-        post_user_id = Post.objects.get(id=post_id).user_id
-        # print(post)
+        # post_user_id = Post.objects.get(id=post_id).user_id
+        
         #for notification
-        currentuser = get_object_or_404(User, pk=user_id)
-        post_user = get_object_or_404(User, pk=post_user_id)
         #till here
         if(post.favourites.filter(id=user_id).exists()):
             post.favourites.remove(user_id)
             
             #for notification
-            notification_record = Notifications.objects.get(currentUser = currentuser, user = post_user, post = post_id,action = 'Saved')
-            notification_record.delete()
+            currentuser = get_object_or_404(User, pk=user_id)
+            post_user = get_object_or_404(User, pk=post.user_id)
+            if(currentuser.id != post_user.id):
+                notification_record = Notifications.objects.get(currentUser = currentuser, user = post_user, post = post_id,action='Saved')
+                notification_record.delete()
             #Till here
 
             return JsonResponse({"message": 'Favourite Removed', "status": status.HTTP_200_OK, 'id': post_id, 'savestatus': 'save'})
         else:
             post.favourites.add(user_id)
-            # for notification
             
+            # for notification
+            currentuser = get_object_or_404(User, pk=user_id)
+            post_user = get_object_or_404(User, pk=post.user_id)
             if(currentuser.id != post_user.id):
                 notification_object = Notifications(
                     currentUser = currentuser,
