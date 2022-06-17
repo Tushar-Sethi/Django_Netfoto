@@ -769,9 +769,11 @@ def favouritePost(request):
         post_id = request.POST.get('post_id')
         user_id = request.user.id
         post = Post.objects.get(id=post_id)
+        post_user_id = Post.objects.get(id=post_id).user_id
+        # print(post)
         #for notification
         currentuser = get_object_or_404(User, pk=user_id)
-        post_user = get_object_or_404(User, pk=post_id)
+        post_user = get_object_or_404(User, pk=post_user_id)
         #till here
         if(post.favourites.filter(id=user_id).exists()):
             post.favourites.remove(user_id)
